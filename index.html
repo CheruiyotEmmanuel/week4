@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>week 4</title>
+    <link rel="stylesheet" href="leaflet.css" />
+    <script src="leaflet.js"></script>
+    <style>
+        body {
+        padding: 0;
+        margin: 0;
+        }
+        html, body, #map {
+        height: 100%;
+        width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div id="map"></div>
+    <script>
+        let map = L.map("map", {center: [-1.2878239463660952, 36.82243824005128], zoom: 16});
+        L.tileLayer(
+            "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", 
+            {attribution: '&copy; <a href="http://' + 
+            'www.openstreetmap.org/copyright">OpenStreetMap</a>'}
+        ).addTo(map);
+
+        /*markers*/ 
+        let ks = L.marker([-1.2878239463660952, 36.82243824005128]).addTo(map); ks.bindPopup("Kenyatta Statue");
+        let up = L.marker([-1.2897439222041303, 36.81655883789063]).addTo(map); up.bindPopup("Uhuru Park");
+        let tuk = L.marker([-1.2917926099086825, 36.82466983795167]).addTo(map); tuk.bindPopup("TUK");
+
+        
+
+         /*L.circleMarker([-1.0941, 37.0093],{radius: 40, color: "blue", fillColor: "yellow"}).addTo(map);*/
+
+        L.circleMarker([-1.286686976752092, 36.82434797286988],{radius: 20, color: "blue", fillColor: "yellow"}).addTo(map);
+        L.circleMarker([-1.2927579595635583, 36.828703880310066],{radius: 50, color: "black", fillColor: "green"}).addTo(map);
+        
+        
+        let popup = L.popup();
+        function onMapClick(e) {
+            popup
+                .setLatLng(e.latlng)
+                .setContent(
+                    "<b>Lon:</b> " + e.latlng.lng + "<br>" + 
+                    "<b>Lat:</b> " + e.latlng.lat
+                )
+                .openOn(map);
+        }
+        map.addEventListener("click", onMapClick);
+
+        const wormhole = L.marker([-1.2927579595635583, 36.828703880310066])
+  .bindPopup(
+    `
+    <h2>Nairobi CBD Railway Station</h2>
+    
+    `
+  )
+  .openPopup()
+  .addTo(map)
+    </script>
+</body>
+</html>
